@@ -2,6 +2,7 @@ package ro.example.lab1.exercise3;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ro.example.lab1.exercise3.config.AppConfig;
+import ro.example.lab1.exercise3.service.GreetingService;
 
 public class Main {
 
@@ -10,8 +11,10 @@ public class Main {
         try (AnnotationConfigApplicationContext context =
                      new AnnotationConfigApplicationContext(AppConfig.class)) {
 
-            // TODO 3: Retrieve GreetingService from Spring.
-            // TODO 4: Print greet("students").
+            GreetingService service =
+                    context.getBean(GreetingService.class);
+
+            System.out.println(service.greet("students"));
         }
     }
 }

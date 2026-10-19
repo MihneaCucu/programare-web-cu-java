@@ -1,8 +1,9 @@
 package ro.example.lab1.exercise3.service;
 
-public class GreetingService {
+import org.springframework.stereotype.Component;
 
-    // TODO 1: Add @Component.
+@Component
+public class GreetingService {
 
     public String greet(String name) {
         return "Hello, " + name + "!";

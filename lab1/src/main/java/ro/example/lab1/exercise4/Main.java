@@ -2,6 +2,7 @@ package ro.example.lab1.exercise4;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ro.example.lab1.exercise4.config.AppConfig;
+import ro.example.lab1.exercise4.service.NotificationService;
 
 public class Main {
 
@@ -10,8 +11,10 @@ public class Main {
         try (AnnotationConfigApplicationContext context =
                      new AnnotationConfigApplicationContext(AppConfig.class)) {
 
-            // TODO 7: Retrieve NotificationService from Spring.
-            // TODO 8: Send "Hello students!".
+            NotificationService service =
+                    context.getBean(NotificationService.class);
+
+            service.notifyUser("Hello students!");
         }
     }
 }
