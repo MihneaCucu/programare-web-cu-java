@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Planner</title>
+</head>
+<body>
+
+<h1>Event Planner</h1>
+<h2>Upcoming Events</h2>
+<a th:href="@{/events/new}">Add New Event</a>
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- TODO 3: Folositi th:each pentru a parcurge lista "events". -->
+
+    <tr>
+        <!-- TODO 4: Folositi th:text pentru a afisa
+             id, name si category pentru fiecare eveniment. -->
+        <td>1</td>
+        <td>Example Event</td>
+        <td>Example Category</td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>
