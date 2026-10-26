@@ -22,7 +22,7 @@ public class EventService {
     }
 
     public void addEvent(Event event) {
-        // TODO 1: Atribuiti un ID unic noului eveniment.
-        // TODO 2: Adaugati evenimentul in lista.
+        event.setId(nextId++);
+        events.add(event);
     }
 }

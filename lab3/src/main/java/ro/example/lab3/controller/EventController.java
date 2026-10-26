@@ -3,6 +3,8 @@ package ro.example.lab3.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import ro.example.lab3.model.Event;
 import ro.example.lab3.service.EventService;
 
@@ -18,8 +20,7 @@ public class EventController {
     @GetMapping("/events")
     public String showEvents(Model model) {
 
-        // TODO 1: Obtineti lista evenimentelor din EventService.
-        // TODO 2: Adaugati lista in Model cu numele "events".
+        model.addAttribute("events", eventService.getAllEvents());
 
         return "events";
     }
@@ -33,12 +34,10 @@ public class EventController {
         return "event-form";
     }
 
-    // TODO 3: Adaugati @PostMapping pentru ruta /events
-    public String addEvent(
-            // TODO 4: Folositi @ModelAttribute
-            Event event) {
+    @PostMapping("/events")
+    public String addEvent(@ModelAttribute Event event) {
 
-        // TODO 5: Apelati eventService.addEvent(event)
+        eventService.addEvent(event);
 
         return "redirect:/events";
     }

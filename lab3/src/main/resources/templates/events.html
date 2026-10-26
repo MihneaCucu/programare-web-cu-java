@@ -21,17 +21,13 @@
     </tr>
     </thead>
 
+
     <tbody>
-    <!-- TODO 3: Folositi th:each pentru a parcurge lista "events". -->
-
-    <tr>
-        <!-- TODO 4: Folositi th:text pentru a afisa
-             id, name si category pentru fiecare eveniment. -->
-        <td>1</td>
-        <td>Example Event</td>
-        <td>Example Category</td>
+    <tr th:each="event : ${events}">
+        <td th:text="${event.id}"></td>
+        <td th:text="${event.name}"></td>
+        <td th:text="${event.category}"></td>
     </tr>
-
     </tbody>
 </table>
 
