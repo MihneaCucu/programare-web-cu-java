@@ -24,25 +24,32 @@ public class EventService {
         return events;
     }
 
+
     // EXERCISE 2
     public List<String> getCategories() {
-        // TODO: Return all distinct event categories.
-        return new ArrayList<>();
+        List<String> categories = new ArrayList<>();
+
+        for (Event event : events) {
+            if (!categories.contains(event.getCategory())) {
+                categories.add(event.getCategory());
+            }
+        }
+
+        return categories;
     }
 
     // EXERCISE 3
     public Event addEvent(Event event) {
-        // TODO: Assign a unique ID to the new event.
-        // TODO: Add the event to the list.
-        // TODO: Return the created event.
-        return null;
+        event.setId(nextId++);
+        events.add(event);
+        return event;
     }
 
     // EXERCISE 4
     public Map<String, Integer> getSummary() {
-        // TODO: Return a map containing:
-        // "totalEvents" - number of events
-        // "totalCategories" - number of distinct categories
-        return Map.of();
+        return Map.of(
+                "totalEvents", events.size(),
+                "totalCategories", getCategories().size()
+        );
     }
 }

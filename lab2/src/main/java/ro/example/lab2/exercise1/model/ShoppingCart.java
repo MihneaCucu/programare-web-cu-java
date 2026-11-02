@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-@Scope("singleton") // TODO 1: Schimbati scope-ul in prototype
+@Scope("prototype")
 public class ShoppingCart {
 
     private final String id = UUID.randomUUID().toString();
