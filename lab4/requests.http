@@ -1,0 +1,15 @@
+
+### Exercise 1 - Get all events
+GET http://localhost:8080/api/events
+
+### Exercise 2 - Get categories
+GET http://localhost:8080/api/categories
+
+### Exercise 3 - Create event
+POST http://localhost:8080/api/events
+Content-Type: application/x-www-form-urlencoded
+
+name=Spring%20Conference&category=Technology
+
+### Exercise 4 - Get summary
+GET http://localhost:8080/api/events/summary
