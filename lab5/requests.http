@@ -1,0 +1,68 @@
+
+### Exercise 1 - Get existing event
+GET http://localhost:8080/api/events/2
+
+### Exercise 1 - Get non-existing event
+GET http://localhost:8080/api/events/999
+
+
+### Exercise 2 - Get all events (no filter)
+GET http://localhost:8080/api/events
+
+### Exercise 2 - Filter Technology events
+GET http://localhost:8080/api/events?category=Technology
+
+### Exercise 2 - Filter Education events
+GET http://localhost:8080/api/events?category=Education
+
+### Exercise 2 - Filter non-existing category
+GET http://localhost:8080/api/events?category=Music
+
+### Exercise 3 - Create event using JSON
+POST http://localhost:8080/api/events
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Spring Conference",
+  "category": "Technology"
+}
+
+
+### Exercise 4 - Update existing event
+PUT http://localhost:8080/api/events/2
+Content-Type: application/json
+
+{
+  "name": "Advanced Spring Boot Lab",
+  "category": "Technology"
+}
+
+
+### Exercise 4 - Update non-existing event
+PUT http://localhost:8080/api/events/999
+Content-Type: application/json
+
+{
+  "name": "Unknown Event",
+  "category": "Technology"
+}
+
+
+### Exercise 4 - Delete existing event
+DELETE http://localhost:8080/api/events/2
+
+
+### Exercise 4 - Delete non-existing event
+DELETE http://localhost:8080/api/events/999
+
+### Exercise 5 - Request with custom header
+GET http://localhost:8080/api/client-info
+X-Client: IntelliJ
+Accept: application/json
+
+
+### Exercise 5 - Request without custom header
+GET http://localhost:8080/api/client-info
+Accept: application/json
+
