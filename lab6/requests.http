@@ -1,0 +1,78 @@
+
+### ==========================================
+### LAB 6 - EXCEPTION HANDLING & VALIDATION
+### ==========================================
+
+
+### Exercise 1 & 2 - Get existing event
+### Expected: 200 OK
+GET http://localhost:8080/api/events/2
+
+
+### Exercise 1 & 2 - Get non-existing event
+### Expected after solving: 404 Not Found + JSON error
+GET http://localhost:8080/api/events/999
+
+
+### Exercise 1 & 2 - Another non-existing event
+### Expected after solving: 404 Not Found + JSON error
+GET http://localhost:8080/api/events/100
+
+
+### ==========================================
+### EXERCISE 3 & 4 - INPUT VALIDATION
+### ==========================================
+
+
+### Valid event - Expected: 201 Created
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "name": "Java Conference",
+  "category": "Technology"
+}
+
+
+### Invalid event - Empty name and category
+### Expected after solving: 400 Bad Request
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "name": "",
+  "category": ""
+}
+
+
+### Invalid event - Name too short
+### Expected after solving: 400 Bad Request
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "name": "Hi",
+  "category": "Technology"
+}
+
+
+### Invalid event - Blank category
+### Expected after solving: 400 Bad Request
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "name": "Spring Workshop",
+  "category": "   "
+}
+
+
+### Invalid update - Empty name
+### Expected after solving: 400 Bad Request
+PUT http://localhost:8080/api/events/2
+Content-Type: application/json
+
+{
+  "name": "",
+  "category": "Technology"
+}
