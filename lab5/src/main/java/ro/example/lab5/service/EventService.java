@@ -53,36 +53,48 @@ public class EventService {
 
     // EXERCISE 1 - Find event by ID
     public Event getEventById(Long id) {
-        // TODO: Search for the event with the given ID.
-        // TODO: Return the event if found, otherwise return null.
+        for (Event event : events) {
+            if (event.getId().equals(id)) {
+                return event;
+            }
+        }
+
         return null;
     }
 
 
     // EXERCISE 2 - Filter events by category
     public List<Event> getEventsByCategory(String category) {
-        // TODO: Filter the events list by category.
-        // TODO: Return only the events whose category matches.
-        return List.of();
+        List<Event> filteredEvents = new ArrayList<>();
+
+        for (Event event : events) {
+            if (event.getCategory().equalsIgnoreCase(category)) {
+                filteredEvents.add(event);
+            }
+        }
+
+        return filteredEvents;
     }
 
     // EXERCISE 4 - Update an event
     public Event updateEvent(Long id, Event updatedEvent) {
-        // TODO: Find the event with the given ID.
-        // TODO: Update its name and category.
-        // TODO: Return the updated event.
-        // TODO: Return null if the event doesn't exist.
+        for (Event event : events) {
+            if (event.getId().equals(id)) {
+                event.setName(updatedEvent.getName());
+                event.setCategory(updatedEvent.getCategory());
+
+                return event;
+            }
+        }
 
         return null;
     }
 
     // EXERCISE 4 - Delete an event
     public boolean deleteEvent(Long id) {
-        // TODO: Find the event with the given ID.
-        // TODO: Remove it from the list.
-        // TODO: Return true if deleted, false otherwise.
-
-        return false;
+        return events.removeIf(
+                event -> event.getId().equals(id)
+        );
     }
 
 }

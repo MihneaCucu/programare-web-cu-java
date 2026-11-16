@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ro.example.lab5.model.Event;
 import ro.example.lab5.service.EventService;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -29,28 +30,28 @@ public class EventRestController {
     // EXERCISE 1 - Get event by ID
     @GetMapping("/events/{id}")
     public ResponseEntity<Event> getEventById(
-            // TODO: Add the annotation to extract the ID from the URL.
-            Long id) {
+            @PathVariable("id") Long id) {
 
-        // TODO: Find the event using EventService.
-        // TODO: Return 200 OK if found.
-        // TODO: Return 404 Not Found otherwise.
+        Event event = eventService.getEventById(id);
 
-        return ResponseEntity.notFound().build();
+        if (event == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(event);
     }
 
     // EXERCISE 2 - Filter events by category
     @GetMapping("/events")
     public List<Event> getAllEvents(
-            // TODO: Add the annotation for an optional query parameter.
+            @RequestParam(value = "category", required = false)
             String category) {
 
         if (category == null || category.isBlank()) {
             return eventService.getAllEvents();
         }
 
-        // TODO: Return events filtered by category.
-        return List.of();
+        return eventService.getEventsByCategory(category);
     }
 
 
@@ -65,15 +66,17 @@ public class EventRestController {
             consumes = "application/json"
     )
     public ResponseEntity<Event> createEvent(
-            // TODO: Add the annotation to read JSON
-            // from the HTTP request body.
-            Event event) {
+            @RequestBody Event event) {
 
-        // TODO: Add the event using EventService.
-        // TODO: Return 201 Created with the event.
-        // TODO: Set the Location header to /api/events/{id}.
+        Event createdEvent = eventService.addEvent(event);
 
-        return ResponseEntity.status(501).build();
+        URI location = URI.create(
+                "/api/events/" + createdEvent.getId()
+        );
+
+        return ResponseEntity
+                .created(location)
+                .body(createdEvent);
     }
 
     // EXERCISE 4 - Update an event
@@ -82,44 +85,42 @@ public class EventRestController {
             consumes = "application/json"
     )
     public ResponseEntity<Event> updateEvent(
-            // TODO: Add the annotation to extract the ID from the URL.
-            Long id,
+            @PathVariable("id") Long id,
+            @RequestBody Event updatedEvent) {
 
-            // TODO: Add the annotation to read the JSON request body.
-            Event updatedEvent) {
+        Event event = eventService.updateEvent(id, updatedEvent);
 
-        // TODO: Call EventService to update the event.
-        // TODO: Return 200 OK with the updated event.
-        // TODO: Return 404 Not Found if the event doesn't exist.
+        if (event == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(event);
     }
 
 
     // EXERCISE 4 - Delete an event
     @DeleteMapping("/events/{id}")
     public ResponseEntity<Void> deleteEvent(
-            // TODO: Add the annotation to extract the ID from the URL.
-            Long id) {
+            @PathVariable("id") Long id) {
 
-        // TODO: Call EventService to delete the event.
-        // TODO: Return 204 No Content if deleted.
-        // TODO: Return 404 Not Found otherwise.
+        boolean deleted = eventService.deleteEvent(id);
 
-        return ResponseEntity.status(501).build();
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 
 
     // EXERCISE 5 - Read HTTP Headers
     @GetMapping("/client-info")
     public Map<String, String> getClientInfo(
-            // TODO: Add @RequestHeader to read "X-Client".
-            // TODO: Use "unknown" as the default value.
-            String client) {
+            @RequestHeader(
+                    value = "X-Client",
+                    defaultValue = "unknown"
+            ) String client) {
 
-        // TODO: Return a Map containing:
-        // "client" -> the received header value.
-
-        return Map.of();
+        return Map.of("client", client);
     }
 }
