@@ -1,0 +1,147 @@
+
+### LAB 7 - JDBC & PostgreSQL
+### Event Planner REST API
+
+
+### GET - All events
+
+GET http://localhost:8080/api/events
+Accept: application/json
+
+
+### GET - Event by ID
+
+GET http://localhost:8080/api/events/2
+Accept: application/json
+
+
+### GET - Event not found (404)
+
+GET http://localhost:8080/api/events/9999
+Accept: application/json
+
+
+### POST - Create event
+
+POST http://localhost:8080/api/events
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "PostgreSQL Workshop",
+  "category": "Technology"
+}
+
+
+### PUT - Update event
+### Replace the ID with the one returned by POST
+
+PUT http://localhost:8080/api/events/5
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Advanced PostgreSQL Workshop",
+  "category": "Database"
+}
+
+
+### DELETE - Remove event
+### Replace the ID with the one returned by POST
+
+DELETE http://localhost:8080/api/events/5
+Accept: application/json
+
+
+
+
+### GET - All event categories
+
+GET http://localhost:8080/api/categories
+Accept: application/json
+
+
+
+### GET - Filter events by category
+
+GET http://localhost:8080/api/events?category=Technology
+Accept: application/json
+
+
+### GET - Filter events by another category
+
+GET http://localhost:8080/api/events?category=Education
+Accept: application/json
+
+
+### GET - Filter events by unknown category
+
+GET http://localhost:8080/api/events?category=Unknown
+Accept: application/json
+
+
+### GET - Events summary
+
+GET http://localhost:8080/api/events/summary
+Accept: application/json
+
+
+### POST - Validation: blank name
+
+POST http://localhost:8080/api/events
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "",
+  "category": "Technology"
+}
+
+
+### POST - Validation: name too short
+
+POST http://localhost:8080/api/events
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "AB",
+  "category": "Technology"
+}
+
+
+### POST - Validation: blank category
+
+POST http://localhost:8080/api/events
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Java Conference",
+  "category": ""
+}
+
+
+### PUT - Validation: invalid event
+
+PUT http://localhost:8080/api/events/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "",
+  "category": "Education"
+}
+
+
+### GET - Client information with custom header
+
+GET http://localhost:8080/api/client-info
+Accept: application/json
+X-Client: IntelliJ
+
+
+### GET - Client information without header
+
+GET http://localhost:8080/api/client-info
+Accept: application/json
