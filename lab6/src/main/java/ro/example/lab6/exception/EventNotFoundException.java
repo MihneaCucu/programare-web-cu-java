@@ -4,9 +4,6 @@ package ro.example.lab6.exception;
 public class EventNotFoundException extends RuntimeException {
 
     public EventNotFoundException(Long id) {
-        // TODO: Create a meaningful error message
-        // that includes the ID of the missing event.
-
-        super("Event not found");
+        super("Event with ID " + id + " was not found");
     }
 }

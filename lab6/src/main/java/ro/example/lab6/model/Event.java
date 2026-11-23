@@ -1,17 +1,22 @@
 package ro.example.lab6.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class Event {
 
     private Long id;
-    // EXERCISE 3 - Input Validation
 
-    // TODO: Add validation annotations:
-    // - Name must not be null, empty, or blank.
-    // - Name must have between 3 and 50 characters.
+    // EXERCISE 3 - Input Validation
+    @NotBlank(message = "Name must not be blank")
+    @Size(
+            min = 3,
+            max = 50,
+            message = "Name must contain between 3 and 50 characters"
+    )
     private String name;
 
-    // TODO: Add validation annotation:
-    // - Category must not be null, empty, or blank.
+    @NotBlank(message = "Category must not be blank")
     private String category;
 
     public Event() {
